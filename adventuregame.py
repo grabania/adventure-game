@@ -1,9 +1,30 @@
 import time
+import random
+
+name = ["dragon", "troll", "gorgon", "pirate"]
+print(random.choice(name))
 
 
 def print_pause(message_to_print):
     print(message_to_print)
     time.sleep(1)
+
+
+def choice():
+    print_pause("Enter 1 to knock on the door of the house.")
+    print_pause("Enter 2 to peer into the cave")
+    print_pause("What would you like to do?")
+    enter = input("(Please enter 1 or 2.)\n")
+    if enter == '1':
+        house()
+        fight_or_run_away()
+        final_question()
+        intro()
+    elif enter == '2':
+        cave()
+        choice()
+    else:
+        enter
 
 
 def intro():
@@ -17,17 +38,17 @@ def intro():
                 " effective)dagger.\n")
 
 
-def first_choice():
+def house():
     print_pause("You approach the door of the house.")
     print_pause("You are about to knock when the door"
-                " opens and out steps a troll.")
-    print_pause("Eep! This is the troll's house!")
-    print_pause("The troll attacks you!")
+                " opens and out steps a " + name + ".")
+    print_pause("Eep! This is the " + name + "'s house!")
+    print_pause("The " + name + " attacks you!")
     print_pause("You feel a bit under-prepared for this,"
                 " what with only having a tiny dagger\n")
 
 
-def second_choice():
+def cave():
     print_pause("You peer cautiously into the cave.")
     print_pause("It turns out to be only a very small cave.")
     print_pause("Your eye catches a glint of metal behind a rock.")
@@ -37,13 +58,13 @@ def second_choice():
     print_pause("You walk back out to the field.\n")
 
 
-def third_choice():
+def fight():
     print_pause("You do your best...")
-    print_pause("but your dagger is nit match for the dragon.")
+    print_pause("but your dagger is not match for the " + name + ".")
     print_pause("You have been defeated!")
 
 
-def fourth_choice():
+def run_away():
     print_pause("You run back into the field. Luckily, "
                 " you don't seem to have been followed.\n")
 
@@ -51,25 +72,11 @@ def fourth_choice():
 def fight_or_run_away():
     response = input("Would you like to (1) fight or (2) run away?")
     if response == '1':
-        third_choice()
+        fight()
         final_question()
-
-
-def choice():
-    print_pause("Enter 1 to knock on the door of the house.")
-    print_pause("Enter 2 to peer into the cave")
-    print_pause("What would you like to do?")
-    enter = input("(Please enter 1 or 2.)\n")
-    if enter == '1':
-        first_choice()
-        fight_or_run_away()
-        final_question()
-        intro()
-    elif enter == '2':
-        second_choice()
+    if response == '2':
+        run_away()
         choice()
-    else:
-        enter
 
 
 def final_question():
@@ -86,7 +93,6 @@ def final_question():
 def play_game():
     intro()
     choice()
-    final_question()
 
 
 play_game()
