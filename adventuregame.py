@@ -2,7 +2,7 @@ import time
 import random
 
 name = ["dragon", "troll", "gorgon", "pirate"]
-print(random.choice(name))
+random.choice(name)()
 
 
 def print_pause(message_to_print):
