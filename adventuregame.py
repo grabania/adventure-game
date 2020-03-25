@@ -1,41 +1,50 @@
 import time
 import random
+import sys
 
-name = ["dragon", "troll", "gorgon", "pirate"]
-random.choice(name)()
+sys.setrecursionlimit(1500)
+
+enemy = ["dragon", "troll", "gorgon", "pirate"]
+name = random.choice(enemy)
 
 
 def print_pause(message_to_print):
     print(message_to_print)
-    time.sleep(1)
+    time.sleep(0.7)
 
 
-def choice():
-    print_pause("Enter 1 to knock on the door of the house.")
-    print_pause("Enter 2 to peer into the cave")
-    print_pause("What would you like to do?")
-    enter = input("(Please enter 1 or 2.)\n")
-    if enter == '1':
+def enter_1_or_2():
+
+    print_pause("(Please enter 1 or 2)\n")
+    knock_or_peer = input()
+    if knock_or_peer == '1':
         house()
         fight_or_run_away()
         final_question()
         intro()
-    elif enter == '2':
+    elif knock_or_peer == '2':
         cave()
         choice()
     else:
-        enter
+        enter_1_or_2()
 
 
 def intro():
     print_pause("You find yourself standing in an open field"
                 " filled with grass and yellow wildflowers.")
-    print_pause("Rumor has it that a gorgon is somewhere around"
+    print_pause("Rumor has it that a " + name + "is somewhere around"
                 " here, and has been terrifying the nearby village.")
     print_pause("In front of you in the house.")
     print_pause("To your right is a dark cave.")
     print_pause("In your hand you hold your trusty(but not very"
                 " effective)dagger.\n")
+
+
+def choice():
+    print_pause("Enter 1 to knock on the door of the house.")
+    print_pause("Enter 2 to peer into the cave.")
+    print_pause("What would you like to do?")
+    enter_1_or_2()
 
 
 def house():
@@ -45,7 +54,7 @@ def house():
     print_pause("Eep! This is the " + name + "'s house!")
     print_pause("The " + name + " attacks you!")
     print_pause("You feel a bit under-prepared for this,"
-                " what with only having a tiny dagger\n")
+                " what with only having a tiny dagger.\n")
 
 
 def cave():
@@ -74,25 +83,33 @@ def fight_or_run_away():
     if response == '1':
         fight()
         final_question()
-    if response == '2':
+    elif response == '2':
         run_away()
         choice()
+    else:
+        final_question()
 
 
 def final_question():
-    again = input("Would you like to play again? (y/n)").lower()
-    if again == "y":
+    print_pause("Would you like to play again? (y/n)")
+    play_again()
+
+
+def play_again():
+    again = input().lower()
+    if again == "n":
+        print_pause("Thanks for playing! See you next time.")
+    elif again == "y":
         print_pause("Excellent! Restarting the game...")
         play_game()
-    elif again == "n":
-        print_pause("Thanks for playing! See you next time.\n")
     else:
-        again
+        final_question()
 
 
 def play_game():
     intro()
     choice()
+    play_again()
 
 
 play_game()
