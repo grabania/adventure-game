@@ -99,6 +99,7 @@ def play_again():
     again = input().lower()
     if again == "n":
         print_pause("Thanks for playing! See you next time.")
+        sys.exit()
     elif again == "y":
         print_pause("Excellent! Restarting the game...")
         play_game()
@@ -110,6 +111,7 @@ def play_game():
     intro()
     choice()
     play_again()
+    sys.exit()
 
 
 play_game()
